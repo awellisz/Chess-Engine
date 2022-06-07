@@ -1,6 +1,8 @@
 #ifndef DEFS_H
 #define DEFS_H
 
+#include <stdlib.h>
+
 typedef unsigned long long U64;
 
 #define NAME "Garry Chess v0.1"
@@ -69,7 +71,19 @@ typedef struct {
     // This is indexed by his_ply.
     // This history array can be used also to determine 3-fold repetitions
 
+    // Piece list
+    // One for each piece type (13) and up to 10 different pieces of 
+    // each piece at one time (e.g. 2 rooks and all 8 pawns 
+    // promote to rooks)
+    int p_list[13][10]; 
+    // e.g. a white knight on E1 looks like p_list[wN][0] = E1;
+    // another white knight on F6 looks like p_list[wN][1] = F6;
+    // if the piece list contains NO_SQ, we know we've reached the end,
+    // so no need to keep looking for a particular piece type
+    // This is overall faster than iterating over every 
+    // square on the board.
 } board_t;
+
 
 // Convert from 64 square board representation to 12- square board
 // representation, and vice versa
