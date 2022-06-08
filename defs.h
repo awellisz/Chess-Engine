@@ -84,11 +84,58 @@ typedef struct {
     // square on the board.
 } board_t;
 
-
 // Convert from 64 square board representation to 12- square board
 // representation, and vice versa
 extern int sq120_to_64[BRD_SQ_NUM];
 extern int sq64_to_120[64];
+// Set masks and clear masks (globals)
+extern U64 set_mask[64];
+extern U64 clear_mask[64];
+
+/* PROTOTYPES */
+
+/* BITBOARDS.C */
+
+/* print_bitboard: print a bitboard to std out
+ *
+ * bb: the bitboard
+ *
+ * returns: nothing, prints to terminal
+ */
+void print_bitboard(U64 bb);
+
+
+/* pop_bit: pops the least significant bit of a bitboard
+ *
+ * bb: pointer to a bitboard
+ *
+ * returns: the index of the least significant bit
+ */
+int pop_bit(U64 *bb);
+
+/* count_bits: counts the number of 1 bits in a bitboard
+ *
+ * bb: a bitboard
+ *
+ * returns: the number of 1 bits
+ */
+int count_bits(U64 bb);
+
+/* INIT.C */
+
+/* fr_to_sq: converts (file, rank) pair to square index
+ *           in 120-based board representation/
+ * f: file
+ * r: rank
+ *
+ * returns: square number
+ */
+int fr_to_sq(int f, int r);
+
+/* all_init: initializes everything
+ */
+void all_init();
+
 
 #endif
 
